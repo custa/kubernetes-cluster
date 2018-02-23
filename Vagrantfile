@@ -69,6 +69,7 @@ cat >/etc/profile.d/zzz_proxy.sh <<\EOF
 # Named 'zzz_proxy.sh', so it will be loaded finally, and overwrite Env variable 'no_proxy'.
 export no_proxy=\\$(echo 172.17.0.{1..255} | sed "s/ /,/g")
 export no_proxy=\\${no_proxy},10.0.2.2,10.0.2.15,127.0.0.1,localhost,.example.com
+export no_proxy=\\${no_proxy},10.254.0.1
 export NO_PROXY=\\${no_proxy}
 
 alias set-proxy='source /etc/profile.d/proxy.sh'
@@ -90,14 +91,24 @@ sed -i 's|^SELINUX=.*|SELINUX=disabled|' /etc/selinux/config
 swapoff -a
 sed -i '/swap/{ s|^|#| }' /etc/fstab
 
+# 
+mkdir -p /etc/sysctl.d/
+cat >/etc/sysctl.d/k8s-sysctl.conf <<\EOF
+net.ipv4.ip_forward = 1
+EOF
+sysctl -p /etc/sysctl.d/k8s-sysctl.conf
+
   SHELL
 
   # 根据节点的主机名和IP，生成 ETCD_INITIAL_CLUSTER
   etcd_cluster = Array.new
+  etcd_servers = Array.new
   (1..$num_instances).each do |i|
     etcd_cluster.push("%s-%02d=http://172.17.0.#{i+100}:2380" % [$instance_name_prefix, i, i])
+    etcd_servers.push("http://172.17.0.#{i+100}:2379" % i)
   end
   ETCD_INITIAL_CLUSTER = etcd_cluster.join(",")
+  KUBE_ETCD_SERVERS = etcd_servers.join(",")
 
   (1..$num_instances).each do |i|
     config.vm.define vm_name = "%s-%02d" % [$instance_name_prefix, i] do |node|
@@ -119,8 +130,12 @@ bash /vagrant/provision/docker.sh
 
 systemctl start etcd flanneld docker &
 
+bash /vagrant/provision/kubernetes.sh "$3" "$5"
+
+systemctl start kube-apiserver kube-controller-manager kube-scheduler kube-proxy kubelet &
+
         SHELL
-        s.args = [i, vm_name, ip, ETCD_INITIAL_CLUSTER]    # 脚本中使用 $1, $2, $3... 读取
+        s.args = [i, vm_name, ip, ETCD_INITIAL_CLUSTER, KUBE_ETCD_SERVERS]    # 脚本中使用 $1, $2, $3... 读取
       end
     end
   end
