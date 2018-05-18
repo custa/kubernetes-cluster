@@ -103,6 +103,10 @@ net.ipv4.ip_forward = 1
 EOF
 sysctl -p /etc/sysctl.d/k8s-sysctl.conf
 
+# 安装一些必备的服务和工具
+#yum -y update
+yum -y install tcpdump ntp
+
   SHELL
 
   # 根据节点的主机名和IP，生成 ETCD_INITIAL_CLUSTER
