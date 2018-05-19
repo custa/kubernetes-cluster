@@ -4,4 +4,4 @@
 # default config should be adequate
 
 # Add your own!
-KUBE_PROXY_ARGS=""
+KUBE_PROXY_ARGS="--cluster-cidr=10.254.0.0/16"
