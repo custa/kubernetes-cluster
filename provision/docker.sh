@@ -31,5 +31,8 @@ Environment="HTTPS_PROXY=${HTTPS_PROXY}"
 Environment="NO_PROXY=10.0.2.2,10.0.2.15,127.0.0.1,localhost,.example.com"
 EOF
 
+mkdir -p /etc/docker
+cp ${LOCATION_PATH}/etc/docker/daemon.json /etc/docker/
+
 systemctl daemon-reload
 systemctl enable docker
