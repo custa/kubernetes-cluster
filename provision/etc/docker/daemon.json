@@ -1,0 +1,7 @@
+{
+  "registry-mirrors": [
+    "http://10.0.2.2:5000",
+    "https://registry.docker-cn.com",
+    "https://mirror.gcr.io"
+  ]
+}
