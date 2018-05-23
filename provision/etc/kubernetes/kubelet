@@ -11,7 +11,7 @@ KUBELET_ADDRESS="--address={{IP}}"
 KUBELET_HOSTNAME="--hostname-override={{IP}}"
 
 # pod infrastructure container
-KUBELET_POD_INFRA_CONTAINER="--pod-infra-container-image=registry.access.redhat.com/rhel7/pod-infrastructure:latest"
+#KUBELET_POD_INFRA_CONTAINER="--pod-infra-container-image=registry.access.redhat.com/rhel7/pod-infrastructure:latest"
 
 # Add your own!
 KUBELET_ARGS="--kubeconfig /var/lib/kubelet/kubeconfig"
