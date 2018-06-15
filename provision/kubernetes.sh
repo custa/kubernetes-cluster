@@ -25,11 +25,23 @@ sed -i "s|{{IP}}|$1|" /etc/kubernetes/kubelet
 # kubelet 配置 WorkingDirectory=/var/lib/kubelet，需要手动创建该目录，不能在 ExecStartPre 创建
 mkdir -p /var/lib/kubelet
 
-cp ${LOCATION_PATH}/var/lib/kubelet/kubeconfig /var/lib/kubelet/
-
 cp ${LOCATION_PATH}/usr/lib/systemd/system/* /usr/lib/systemd/system/
 
 echo "source <(kubectl completion bash)" >> ~/.bashrc
+
+# 配置 kubectl kubeconfig
+kubectl config set-cluster kubernetes \
+--certificate-authority=/etc/kubernetes/ssl/ca.crt \
+--embed-certs=true \
+--server=https://172.17.0.100:6443
+kubectl config set-credentials admin \
+--client-certificate=/etc/kubernetes/ssl/kubectl.crt \
+--client-key=/etc/kubernetes/ssl/kubectl.key \
+--embed-certs=true
+kubectl config set-context kubernetes \
+--cluster=kubernetes \
+--user=admin
+kubectl config use-context kubernetes
 
 systemctl daemon-reload
 systemctl enable kube-apiserver kube-controller-manager kube-scheduler kube-proxy kubelet

@@ -4,4 +4,4 @@
 # defaults from config and apiserver should be adequate
 
 # Add your own!
-KUBE_CONTROLLER_MANAGER_ARGS="--leader-elect=true"
+KUBE_CONTROLLER_MANAGER_ARGS="--leader-elect=true --kubeconfig=/etc/kubernetes/master.kubeconfig --root-ca-file=/etc/kubernetes/ssl/ca.crt --service-account-private-key-file=/etc/kubernetes/ssl/service-account.key"

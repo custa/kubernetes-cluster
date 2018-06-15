@@ -4,4 +4,4 @@
 # default config should be adequate
 
 # Add your own!
-KUBE_SCHEDULER_ARGS="--leader-elect=true"
+KUBE_SCHEDULER_ARGS="--leader-elect=true --kubeconfig=/etc/kubernetes/master.kubeconfig"
