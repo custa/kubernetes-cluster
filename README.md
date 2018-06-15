@@ -43,5 +43,13 @@ vagrant ssh node-01
 - 使用 kubectl 操作 Kubernetes 集群
 
 ```
-kubectl get node
+kubectl --server=https://127.0.0.1:6443 --certificate-authority=/etc/kubernetes/ssl/ca.crt --client-certificate=/etc/kubernetes/ssl/kubectl.crt --client-key=/etc/kubernetes/ssl/kubectl.key get node
+```
+or
+```
+kubectl --server=https://127.0.0.1:6443 --certificate-authority=/etc/kubernetes/ssl/ca.crt --username=admin --password=admin get node
+```
+or
+```
+curl --cacert /etc/kubernetes/ssl/ca.crt -u "admin:admin" https://127.0.0.1:6443/version
 ```
