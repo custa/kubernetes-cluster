@@ -17,8 +17,8 @@ openssl req -nodes -newkey rsa:4096 -keyout node.key -out node.csr -subj "/CN=no
 
 openssl x509 -req -CAcreateserial -sha256 -CA ca.crt -CAkey ca.key -days 3650 -extensions v3_req -extfile node_ssl.cnf -in node.csr -out node.crt
 
-### kubectl 密钥及证书
-openssl req -nodes -newkey rsa:4096 -keyout kubectl.key -out kubectl.csr -subj "/CN=kubectl.k8s.local"
+### kubectl 密钥及证书，指定 "/O=system:masters"，解决 kubectl 使用证书认证无权限创建 role 问题
+openssl req -nodes -newkey rsa:4096 -keyout kubectl.key -out kubectl.csr -subj "/CN=kubectl.k8s.local/O=system:masters"
 
 openssl x509 -req -CAcreateserial -sha256 -CA ca.crt -CAkey ca.key -days 3650 -extensions v3_req -extfile kubectl_ssl.cnf -in kubectl.csr -out kubectl.crt
 
