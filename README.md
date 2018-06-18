@@ -19,6 +19,12 @@ kubectl 通过本节点上的 kube-apiserver 访问 Kubernetes 集群。
 - docker-ce 17.12.0-ce
 - Kubernetes 1.9.2
 
+### Addons:
+* ###### Dashboard
+
+`https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy`
+
+
 ### 使用步骤：
 - 下载 Kubernetes 二进制包放到当前目录
 
