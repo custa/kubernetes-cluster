@@ -23,6 +23,12 @@ openssl req -nodes -newkey rsa:4096 -keyout kubectl.key -out kubectl.csr -subj "
 openssl x509 -req -CAcreateserial -sha256 -CA ca.crt -CAkey ca.key -days 3650 -extensions v3_req -extfile kubectl_ssl.cnf -in kubectl.csr -out kubectl.crt
 
 
+### kubernetes-dashboard 密钥及证书
+openssl req -nodes -newkey rsa:4096 -keyout dashboard/dashboard.key -out dashboard/dashboard.csr -subj "/CN=dashboard.k8s.local"
+
+openssl x509 -req -CAcreateserial -sha256 -CA ca.crt -CAkey ca.key -days 3650 -extensions v3_req -extfile dashboard/dashboard_ssl.cnf -in dashboard/dashboard.csr -out dashboard/dashboard.crt
+
+
 ### Service Account 密钥对
 openssl genrsa -out service-account.key 4096
 

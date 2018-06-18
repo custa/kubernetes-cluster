@@ -147,6 +147,12 @@ bash /vagrant/provision/keepalived.sh
 
 systemctl start keepalived &
 
+if [[ "$1" == 3 ]]; then
+  # 参考 https://github.com/kubernetes/dashboard/wiki/Installation#recommended-setup
+  kubectl create secret generic kubernetes-dashboard-certs --from-file=/etc/kubernetes/ssl/dashboard/ -n kube-system
+  kubectl apply -f /vagrant/kubernetes-dashboard.yaml
+fi
+
         SHELL
         s.args = [i, vm_name, ip, ETCD_INITIAL_CLUSTER, KUBE_ETCD_SERVERS]    # 脚本中使用 $1, $2, $3... 读取
       end
