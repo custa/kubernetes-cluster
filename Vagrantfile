@@ -25,7 +25,7 @@ $vm_memory = 1024
 $vm_cpus = 2
 $shared_folders = {}
 #$shared_folders = { "." => "/share" }
-$forwarded_ports = { 6443 => 6443 }
+$forwarded_ports = { 6443 => 6443, 4194 => 4194 }
 
 Vagrant.configure("2") do |config|
 
