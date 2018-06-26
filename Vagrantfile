@@ -105,7 +105,7 @@ sysctl -p /etc/sysctl.d/k8s-sysctl.conf
 
 # 安装一些必备的服务和工具
 #yum -y update
-yum -y install tcpdump ntp
+yum -y install tcpdump ntp bind-utils
 
   SHELL
 
