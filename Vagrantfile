@@ -150,7 +150,7 @@ systemctl start keepalived &
 if [[ "$1" == 3 ]]; then
   # 参考 https://github.com/kubernetes/dashboard/wiki/Installation#recommended-setup
   kubectl create secret generic kubernetes-dashboard-certs --from-file=/etc/kubernetes/ssl/dashboard/ -n kube-system
-  kubectl apply -f /vagrant/kubernetes-dashboard.yaml
+  kubectl apply -f /vagrant/addons/kubernetes-dashboard.yaml
 fi
 
         SHELL
