@@ -14,4 +14,4 @@ KUBELET_HOSTNAME="--hostname-override={{IP}}"
 #KUBELET_POD_INFRA_CONTAINER="--pod-infra-container-image=registry.access.redhat.com/rhel7/pod-infrastructure:latest"
 
 # Add your own!
-KUBELET_ARGS="--kubeconfig /etc/kubernetes/node.kubeconfig"
+KUBELET_ARGS="--kubeconfig /etc/kubernetes/node.kubeconfig --cluster-dns=10.254.0.53 --cluster-domain=cluster.local"
