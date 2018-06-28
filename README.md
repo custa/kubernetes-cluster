@@ -24,7 +24,9 @@ kubectl 通过本节点上的 kube-apiserver 访问 Kubernetes 集群。
 
 `https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy`
 
-* ###### Kube-DNS
+* ###### Kube-DNS _(Deprecated)_
+
+* ###### CoreDNS
 
 
 ### 使用步骤：

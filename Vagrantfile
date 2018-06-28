@@ -143,8 +143,8 @@ bash /vagrant/provision/keepalived.sh
 systemctl start keepalived &
 
 if [[ "$1" == 3 ]]; then
-  # 参考 https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/kube-dns
-  sed -e 's/$DNS_SERVER_IP/10.254.0.53/g' -e 's/$DNS_DOMAIN/cluster.local/g' /vagrant/addons/kube-dns.yaml.sed | kubectl apply -f -
+  # 参考 https://github.com/coredns/deployment/tree/034dbf7/kubernetes
+  /vagrant/addons/deploy.sh -i 10.254.0.53 -t /vagrant/addons/coredns.yaml.sed | sed 's/replicas: 2/replicas: 1/' | kubectl apply -f -
 
   # 参考 https://github.com/kubernetes/dashboard/wiki/Installation#recommended-setup
   kubectl create secret generic kubernetes-dashboard-certs --from-file=/etc/kubernetes/ssl/dashboard/ -n kube-system
