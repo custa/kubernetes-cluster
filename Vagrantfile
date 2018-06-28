@@ -144,11 +144,11 @@ systemctl start keepalived &
 
 if [[ "$1" == 3 ]]; then
   # 参考 https://github.com/coredns/deployment/tree/034dbf7/kubernetes
-  /vagrant/addons/deploy.sh -i 10.254.0.53 -t /vagrant/addons/coredns.yaml.sed | sed 's/replicas: 2/replicas: 1/' | kubectl apply -f -
+  /vagrant/addons/dns/deploy.sh -i 10.254.0.53 -t /vagrant/addons/dns/coredns.yaml.sed | sed 's/replicas: 2/replicas: 1/' | kubectl apply -f -
 
   # 参考 https://github.com/kubernetes/dashboard/wiki/Installation#recommended-setup
   kubectl create secret generic kubernetes-dashboard-certs --from-file=/etc/kubernetes/ssl/dashboard/ -n kube-system
-  kubectl apply -f /vagrant/addons/kubernetes-dashboard.yaml
+  kubectl apply -f /vagrant/addons/dashboard/kubernetes-dashboard.yaml
 fi
 
         SHELL
