@@ -16,4 +16,3 @@ cp ${LOCATION_PATH}/etc/keepalived/keepalived.conf /etc/keepalived/
 sed -i "s|After=.*|& kube-apiserver.service|" /usr/lib/systemd/system/keepalived.service
 
 systemctl daemon-reload
-systemctl enable keepalived
