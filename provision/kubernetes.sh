@@ -44,4 +44,3 @@ kubectl config set-context kubernetes \
 kubectl config use-context kubernetes
 
 systemctl daemon-reload
-systemctl enable kube-apiserver kube-controller-manager kube-scheduler kube-proxy kubelet

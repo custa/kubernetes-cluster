@@ -141,11 +141,22 @@ systemctl start etcd flanneld docker &
 
 bash /vagrant/provision/kubernetes.sh "$3" "$5"
 
-systemctl start kube-apiserver kube-controller-manager kube-scheduler kube-proxy kubelet &
-
 bash /vagrant/provision/keepalived.sh
 
-systemctl start keepalived &
+#systemctl start kube-apiserver kube-controller-manager kube-scheduler kube-proxy kubelet &
+# 宿主机内存不够，只在部分节点启动部分服务
+if [[ "$1" == 1 ]]; then
+  systemctl enable kube-apiserver kube-controller-manager kube-scheduler
+  systemctl start kube-apiserver kube-controller-manager kube-scheduler &
+
+  systemctl enable keepalived
+  systemctl start keepalived &
+else
+  systemctl enable kubelet
+  systemctl start kubelet &
+fi
+systemctl enable kube-proxy
+systemctl start kube-proxy &
 
 if [[ "$1" == 3 ]]; then
   # 参考 https://github.com/coredns/deployment/tree/034dbf7/kubernetes
