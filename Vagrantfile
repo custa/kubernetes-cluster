@@ -166,6 +166,9 @@ if [[ "$1" == 3 ]]; then
   kubectl create secret generic kubernetes-dashboard-certs --from-file=/etc/kubernetes/ssl/dashboard/ -n kube-system
   kubectl apply -f /vagrant/addons/dashboard/kubernetes-dashboard.yaml
 
+  # Heapster + InfluxDB + Grafana
+  kubectl apply -f /vagrant/addons/heapster/rbac/ -f /vagrant/addons/heapster/influxdb/
+
 fi
 
         SHELL
