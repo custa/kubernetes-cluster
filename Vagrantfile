@@ -160,6 +160,10 @@ if [[ "$1" == 3 ]]; then
   # 参考 https://github.com/kubernetes/dashboard/wiki/Installation#recommended-setup
   kubectl create secret generic kubernetes-dashboard-certs --from-file=/etc/kubernetes/ssl/dashboard/ -n kube-system
   kubectl apply -f /vagrant/addons/dashboard/kubernetes-dashboard.yaml
+
+  # Heapster + InfluxDB + Grafana
+  # https://github.com/kubernetes/heapster/tree/f2199dc/deploy/kube-config/influxdb
+  kubectl apply -f /vagrant/addons/heapster/rbac/ -f /vagrant/addons/heapster/influxdb/
 fi
 
         SHELL

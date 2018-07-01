@@ -22,12 +22,32 @@ kubectl 通过本节点上的 kube-apiserver 访问 Kubernetes 集群。
 ### Addons:
 * ###### Dashboard
 
-`https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy`
-
 * ###### Kube-DNS _(Deprecated)_
 
 * ###### CoreDNS
 
+* ###### Heapster + InfluxDB + Grafana
+
+	1. Heapster
+
+		默认缓存了 15 分钟的数据
+
+		```
+		curl -u "admin:admin" -k https://172.17.0.100:6443/api/v1/proxy/namespaces/kube-system/services/heapster/api/v1/model/namespaces/kube-system/metrics/memory/usage
+		```
+
+	2. Grafana
+
+		通过 Kubernetes Proxy API 访问
+		```
+		https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/monitoring-grafana/proxy/
+		```
+
+	[Resource Usage Monitoring in Kubernetes](https://kubernetes.io/blog/2015/05/resource-usage-monitoring-kubernetes/)
+
+	[kubernetes/heapster](https://github.com/kubernetes/heapster/tree/master/deploy/kube-config)
+
+	[kubernetes/kubernetes](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/cluster-monitoring)
 
 ### 使用步骤：
 - 下载 Kubernetes 二进制包放到当前目录
