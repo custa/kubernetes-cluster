@@ -29,5 +29,7 @@ cp ${LOCATION_PATH}/var/lib/kubelet/kubeconfig /var/lib/kubelet/
 
 cp ${LOCATION_PATH}/usr/lib/systemd/system/* /usr/lib/systemd/system/
 
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+
 systemctl daemon-reload
 systemctl enable kube-apiserver kube-controller-manager kube-scheduler kube-proxy kubelet
