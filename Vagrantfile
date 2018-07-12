@@ -167,7 +167,10 @@ if [[ "$1" == 3 ]]; then
   kubectl apply -f /vagrant/addons/dashboard/kubernetes-dashboard.yaml
 
   # Heapster + InfluxDB + Grafana
-  kubectl apply -f /vagrant/addons/heapster/rbac/ -f /vagrant/addons/heapster/influxdb/
+  #kubectl apply -f /vagrant/addons/heapster/rbac/ -f /vagrant/addons/heapster/influxdb/
+
+  # Metrics Server
+  kubectl apply -f /vagrant/addons/metrics-server/
 
 fi
 

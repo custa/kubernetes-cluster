@@ -22,7 +22,7 @@ kubectl 通过浮动 IP 访问 kube-apiserver 操作 Kubernetes 集群。
 - etcd 3.2.11+
 - flannel 0.7.1+
 - docker-ce 17.12.0-ce+
-- Kubernetes 1.9.2+
+- Kubernetes 1.10.0+
 
 
 ## Addons
@@ -55,7 +55,7 @@ ___参考资料___
 
 [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/coredns)
 
-### 4. Heapster + InfluxDB + Grafana
+### ~~4. Heapster + InfluxDB + Grafana~~ _(Deprecated)_
 
 #### 1) Heapster
 
@@ -85,6 +85,22 @@ ___参考资料___
 [kubernetes/heapster](https://github.com/kubernetes/heapster/tree/master/deploy/kube-config)
 
 [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/cluster-monitoring)
+
+### 5. Metrics Server _(替代 Heapster)_
+
+提供 `kubectl top node/top` 所需的指标数据。
+
+___注意问题___
+
+[Error: cluster doesn't provide requestheader-client-ca-file](https://github.com/kubernetes-incubator/kubespray/issues/2092)
+
+___参考资料___
+
+[Core metrics pipeline](https://kubernetes.io/docs/tasks/debug-application-cluster/core-metrics-pipeline/)
+
+	Note: The API requires metrics server to be deployed in the cluster. Otherwise it will be not available.
+
+[Metrics Server Design Doc](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/instrumentation/metrics-server.md).
 
 ---
 
