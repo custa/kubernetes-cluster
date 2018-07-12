@@ -23,4 +23,4 @@ KUBE_SERVICE_ADDRESSES="--service-cluster-ip-range=10.254.0.0/16"
 KUBE_ADMISSION_CONTROL="--admission-control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota"
 
 # Add your own!
-KUBE_API_ARGS="--client-ca-file=/etc/kubernetes/ssl/ca.crt --tls-cert-file=/etc/kubernetes/ssl/master.crt --tls-private-key-file=/etc/kubernetes/ssl/master.key --basic-auth-file=/etc/kubernetes/basic_auth_file --service-account-key-file=/etc/kubernetes/ssl/service-account.key"
+KUBE_API_ARGS="--client-ca-file=/etc/kubernetes/ssl/ca.crt --tls-cert-file=/etc/kubernetes/ssl/master.crt --tls-private-key-file=/etc/kubernetes/ssl/master.key --basic-auth-file=/etc/kubernetes/basic_auth_file --service-account-key-file=/etc/kubernetes/ssl/service-account.key --requestheader-client-ca-file=/etc/kubernetes/ssl/ca.crt --requestheader-allowed-names= --requestheader-extra-headers-prefix=X-Remote-Extra- --requestheader-group-headers=X-Remote-Group --requestheader-username-headers=X-Remote-User"

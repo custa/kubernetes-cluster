@@ -163,7 +163,11 @@ if [[ "$1" == 3 ]]; then
 
   # Heapster + InfluxDB + Grafana
   # https://github.com/kubernetes/heapster/tree/f2199dc/deploy/kube-config/influxdb
-  kubectl apply -f /vagrant/addons/heapster/rbac/ -f /vagrant/addons/heapster/influxdb/
+  #kubectl apply -f /vagrant/addons/heapster/rbac/ -f /vagrant/addons/heapster/influxdb/
+
+  # Metrics Server
+  # https://github.com/kubernetes/kops/tree/3c1dca2/addons/metrics-server
+  kubectl apply -f /vagrant/addons/metrics-server/
 fi
 
         SHELL
