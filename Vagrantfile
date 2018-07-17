@@ -25,7 +25,7 @@ $vm_memory = 1024
 $vm_cpus = 2
 $shared_folders = {}
 #$shared_folders = { "." => "/share" }
-$forwarded_ports = { 6443 => 6443, 4194 => 4194, 30443 => 30443 }
+$forwarded_ports = { 6443 => 6443, 4194 => 4194, 30443 => 30443, 30030 => 30030, 30090 => 30090, 30093 => 30093 }
 
 Vagrant.configure("2") do |config|
 
@@ -168,6 +168,11 @@ if [[ "$1" == 3 ]]; then
   # Metrics Server
   # https://github.com/kubernetes/kops/tree/3c1dca2/addons/metrics-server
   kubectl apply -f /vagrant/addons/metrics-server/
+
+  # Prometheus + Grafana
+  # https://raw.githubusercontent.com/giantswarm/kubernetes-prometheus/1d9b889/manifests-all.yaml -- 有修改
+  kubectl apply -f /vagrant/addons/prometheus/
+
 fi
 
         SHELL
