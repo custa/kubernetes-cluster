@@ -172,6 +172,9 @@ if [[ "$1" == 3 ]]; then
   # Metrics Server
   kubectl apply -f /vagrant/addons/metrics-server/
 
+  # kube-state-metrics
+  kubectl apply -f /vagrant/addons/kube-state-metrics/
+
 fi
 
         SHELL

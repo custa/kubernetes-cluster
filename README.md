@@ -102,6 +102,12 @@ ___参考资料___
 
 [Metrics Server Design Doc](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/instrumentation/metrics-server.md).
 
+### 6. kube-state-metrics
+
+___参考资料___
+
+[kubernetes/kube-state-metrics](https://github.com/kubernetes/kube-state-metrics)
+
 ---
 
 ## 操作步骤
