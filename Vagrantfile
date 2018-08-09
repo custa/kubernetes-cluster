@@ -175,6 +175,9 @@ if [[ "$1" == 3 ]]; then
   # kube-state-metrics
   kubectl apply -f /vagrant/addons/kube-state-metrics/
 
+  # monitoring namespace
+  kubectl apply -f /vagrant/addons/prometheus/monitoring-namespace.yaml
+
 fi
 
         SHELL
