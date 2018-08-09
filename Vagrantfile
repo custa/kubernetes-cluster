@@ -178,6 +178,9 @@ if [[ "$1" == 3 ]]; then
   # monitoring namespace
   kubectl apply -f /vagrant/addons/prometheus/monitoring-namespace.yaml
 
+  # node-exporter
+  kubectl apply -f /vagrant/addons/prometheus/node-exporter/
+
 fi
 
         SHELL
