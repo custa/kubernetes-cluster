@@ -25,7 +25,7 @@ $vm_memory = 1536
 $vm_cpus = 2
 $shared_folders = {}
 #$shared_folders = { "." => "/share" }
-$forwarded_ports = { 6443 => 6443, 4194 => 4194, 30443 => 30443 }
+$forwarded_ports = { 6443 => 6443, 4194 => 4194, 30443 => 30443, 30090 => 30090 }
 
 Vagrant.configure("2") do |config|
 
@@ -183,6 +183,11 @@ if [[ "$1" == 3 ]]; then
 
   # blackbox-exporter
   kubectl apply -f /vagrant/addons/prometheus/blackbox-exporter/
+
+  # Prometheus
+  kubectl -n monitoring create configmap prometheus --from-file=/vagrant/addons/prometheus/prometheus/config/prometheus.yaml
+  kubectl -n monitoring create configmap prometheus-rules --from-file=/vagrant/addons/prometheus/prometheus/rules/
+  kubectl apply -f /vagrant/addons/prometheus/prometheus/
 
 fi
 

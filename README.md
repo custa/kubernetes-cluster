@@ -108,6 +108,15 @@ ___参考资料___
 
 [kubernetes/kube-state-metrics](https://github.com/kubernetes/kube-state-metrics)
 
+### 7. Prometheus
+
+#### 1) Node-Exporter
+
+#### 2) Blackbox-Exporter
+
+#### 3) Prometheus
+
+
 ---
 
 ## 操作步骤

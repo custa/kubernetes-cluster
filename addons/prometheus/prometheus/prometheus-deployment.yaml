@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  namespace: monitoring
+  labels:
+    app: prometheus
+    component: core
+spec:
+  selector:
+    matchLabels:
+      app: prometheus
+      component: core
+  replicas: 1
+  template:
+    metadata:
+      name: prometheus
+      labels:
+        app: prometheus
+        component: core
+    spec:
+      serviceAccountName: prometheus
+      containers:
+      - name: prometheus
+        image: prom/prometheus:v2.3.2
+        args:
+        - '--web.enable-lifecycle'
+        - '--storage.tsdb.retention=12h'
+        - '--config.file=/etc/prometheus/prometheus.yaml'
+        ports:
+        - name: ui
+          containerPort: 9090
+        resources:
+          requests:
+            cpu: 500m
+            memory: 500M
+          limits:
+            cpu: 500m
+            memory: 500M
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/prometheus
+        - name: rules-volume
+          mountPath: /etc/prometheus-rules
+      volumes:
+      - name: config-volume
+        configMap:
+          name: prometheus
+      - name: rules-volume
+        configMap:
+          name: prometheus-rules
