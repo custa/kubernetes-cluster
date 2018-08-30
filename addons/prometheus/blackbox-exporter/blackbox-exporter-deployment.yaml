@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: blackbox-exporter
+  name: blackbox-exporter
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: blackbox-exporter
+  template:
+    metadata:
+      labels:
+        app: blackbox-exporter
+    spec:
+      containers:
+      - args:
+        - --config.file=/config/blackbox.yml
+        - --log.level=debug
+        ports:
+        - name: http
+          containerPort: 9115
+        image: prom/blackbox-exporter:master
+        name: blackbox-exporter
+        resources:
+          limits:
+            cpu: 102m
+            memory: 180Mi
+          requests:
+            cpu: 102m
+            memory: 180Mi
+        volumeMounts:
+        - mountPath: /config
+          name: config-volume
+          readOnly: true
+      volumes:
+      - name: config-volume
+        configMap:
+          name: blackbox-exporter

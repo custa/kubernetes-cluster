@@ -181,6 +181,9 @@ if [[ "$1" == 3 ]]; then
   # node-exporter
   kubectl apply -f /vagrant/addons/prometheus/node-exporter/
 
+  # blackbox-exporter
+  kubectl apply -f /vagrant/addons/prometheus/blackbox-exporter/
+
 fi
 
         SHELL
