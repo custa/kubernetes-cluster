@@ -121,6 +121,57 @@ ___参考资料___
 #### 5) Grafana
 
 
+#### 监控内容
+Prometheus 监控包括 _采集指标（白盒监控）_ 和 _探测服务(黑盒监控)_。
+基于 Kubernetes 资源的监控似乎比较复杂，目前做了一些约定，详见[这里](/addons/prometheus/monitor_convention.md)。
+
+##### 采集指标
+
+1. job: prometheus -- 使用 static_configs
+
+	* prometheus
+
+2. job: kubernetes-apiserver  --  使用 <kubernetes_sd_configs> role: endpoints
+
+	* kube-apiserver
+
+3. job: kubernetes-node  --  使用 <kubernetes_sd_configs> role: node
+
+	* node 节点
+
+4. job: kubernetes-endpoints  --  使用 <kubernetes_sd_configs> role: endpoints
+
+	* metrics-server
+
+	* blackbox-exporter
+
+	* kube-state-metrics
+
+	* kube-dns（端口 9153）
+
+	* kubernetes-dashboard
+
+	* node-exporter
+
+5. job: kubernetes-pod  --  使用 <kubernetes_sd_configs> role: pod
+
+	* 暂无
+
+##### 探测服务（通过 blackbox-exporter）
+
+1. job: kubernetes-service-dns
+
+	* kube-dns （udp 53）
+
+2. job: kubernetes-service-http
+
+	* kube-state-metrics （http）
+
+	* kubernetes-dashboard （https）
+
+	* metrics-server （https)
+
+
 ---
 
 ## 操作步骤
