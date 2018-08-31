@@ -160,6 +160,8 @@ metadata:
     k8s-app: kubernetes-dashboard
   annotations:
     prometheus.io/scheme: "https"
+    prometheus.io/probe: "true"
+    prometheus.io/module: "http_2xx"
   name: kubernetes-dashboard
   namespace: kube-system
 spec:

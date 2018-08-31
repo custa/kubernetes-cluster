@@ -93,6 +93,8 @@ metadata:
     kubernetes.io/name: "Metrics-server"
   annotations:
     prometheus.io/scheme: "https"
+    prometheus.io/probe: "true"
+    prometheus.io/module: "http_2xx"
 spec:
   selector:
     k8s-app: metrics-server

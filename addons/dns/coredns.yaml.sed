@@ -139,6 +139,8 @@ metadata:
   annotations:
     prometheus.io/port: "9153"
     prometheus.io/scrape: "true"
+    prometheus.io/probe: "true"
+    prometheus.io/module: "dns"
   labels:
     k8s-app: kube-dns
     kubernetes.io/cluster-service: "true"

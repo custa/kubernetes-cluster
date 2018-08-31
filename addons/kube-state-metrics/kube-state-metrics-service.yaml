@@ -7,6 +7,8 @@ metadata:
     k8s-app: kube-state-metrics
   annotations:
     prometheus.io/scrape: 'true'
+    prometheus.io/probe: "true"
+    prometheus.io/module: "http_2xx"
 spec:
   ports:
   - name: http-metrics
