@@ -91,6 +91,8 @@ metadata:
   namespace: kube-system
   labels:
     kubernetes.io/name: "Metrics-server"
+  annotations:
+    prometheus.io/scheme: "https"
 spec:
   selector:
     k8s-app: metrics-server
@@ -131,3 +133,7 @@ spec:
             limits:
               cpu: 100m
               memory: 500Mi
+          ports:
+          - name: https
+            containerPort: 443
+            protocol: TCP
